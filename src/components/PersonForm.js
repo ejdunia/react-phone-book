@@ -24,12 +24,3 @@ const PersonForm = ({
 };
 
 export default PersonForm;
-{
-    /* <PersonForm
-                onSubmit={addPerson}
-                handleNameInputChange={handleNameInputChange}
-                handleNumInputChange={handleNumInputChange}
-                newName={newName}
-                newNumber={newNumber}
-            /> */
-}

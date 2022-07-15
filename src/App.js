@@ -2,14 +2,13 @@ import { useState } from "react";
 import Persons from "./Persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
-import Input from "./components/Input";
 function App() {
-    const persons = [
+    const [persons, setPersons] = useState([
         { name: "Arto Hellas", number: "040-123456", id: 1 },
         { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
         { name: "Dan Abramov", number: "12-43-234345", id: 3 },
         { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-    ];
+    ]);
 
     const [newName, setNewName] = useState("");
     const [newNumber, setNewNumber] = useState("");
@@ -47,7 +46,8 @@ function App() {
 
         persons.map((person) => person.name).includes(newPerson.name)
             ? alert(`${newPerson.name} is already added`)
-            : setShowAll(persons.concat(newPerson));
+            : setPersons(persons.concat(newPerson));
+        setShowAll(persons);
         setNewName("");
         setNewNumber("");
     };
@@ -56,23 +56,13 @@ function App() {
             <h2>Phonebook</h2>
             <Filter onChange={handleFilterChange} value={filter} />
 
-            {/* <Form onSubmit={addPerson} /> */}
-
-            <form onSubmit={addPerson}>
-                <div>
-                    name:{" "}
-                    <input value={newName} onChange={handleNameInputChange} />
-                </div>
-
-                <div>
-                    Phone:{" "}
-                    <Input onChange={handleNumInputChange} value={newNumber} />
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
-
+            <PersonForm
+                onSubmit={addPerson}
+                handleNameInputChange={handleNameInputChange}
+                handleNumInputChange={handleNumInputChange}
+                newName={newName}
+                newNumber={newNumber}
+            />
             <h2>Numbers</h2>
             <Persons personList={showAll} />
         </div>
