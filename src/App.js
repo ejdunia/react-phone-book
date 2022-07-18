@@ -1,7 +1,9 @@
 import { useState } from "react";
-import Persons from "./Persons";
+import Persons from "./components/Persons";
 import Filter from "./components/Filter";
 import PersonForm from "./components/PersonForm";
+import FormContainer from "./components/styles/FormContainer.styled";
+import Container from "./components/styles/Container.styled";
 function App() {
     const [persons, setPersons] = useState([
         { name: "Arto Hellas", number: "040-123456", id: 1 },
@@ -47,25 +49,32 @@ function App() {
         persons.map((person) => person.name).includes(newPerson.name)
             ? alert(`${newPerson.name} is already added`)
             : setPersons(persons.concat(newPerson));
-        setShowAll(persons);
+        setShowAll(persons.concat(newPerson));
         setNewName("");
         setNewNumber("");
     };
     return (
-        <div>
+        <Container>
             <h2>Phonebook</h2>
-            <Filter onChange={handleFilterChange} value={filter} />
+            <FormContainer>
+                <Filter onChange={handleFilterChange} value={filter} />
 
-            <PersonForm
-                onSubmit={addPerson}
-                handleNameInputChange={handleNameInputChange}
-                handleNumInputChange={handleNumInputChange}
-                newName={newName}
-                newNumber={newNumber}
-            />
+                <PersonForm
+                    onSubmit={addPerson}
+                    handleNameInputChange={handleNameInputChange}
+                    handleNumInputChange={handleNumInputChange}
+                    newName={newName}
+                    newNumber={newNumber}
+                />
+            </FormContainer>
+
             <h2>Numbers</h2>
+            <p>
+                "Build 10 dynamic reusable components (form, input, button,
+                table, checkbox, data table)"
+            </p>
             <Persons personList={showAll} />
-        </div>
+        </Container>
     );
 }
 

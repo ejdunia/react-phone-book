@@ -1,5 +1,7 @@
 // import Input from "./Input";
-// import Button from "./Button";
+import StyledForm from "./styles/StyledForm.styled";
+import Button from "./Button";
+import CancelButton from "./CancelButton";
 const PersonForm = ({
     onSubmit,
     handleNameInputChange,
@@ -8,18 +10,30 @@ const PersonForm = ({
     newNumber,
 }) => {
     return (
-        <form onSubmit={onSubmit}>
-            <div>
-                name: <input onChange={handleNameInputChange} value={newName} />
-            </div>
-            <div>
-                Phone:
-                <input onChange={handleNumInputChange} value={newNumber} />
-            </div>
-            <div>
-                <button type="submit">add</button>
-            </div>
-        </form>
+        <div>
+            <StyledForm onSubmit={onSubmit}>
+                <div>
+                    Name:{" "}
+                    <input onChange={handleNameInputChange} value={newName} />
+                </div>
+                <div>
+                    Phone:
+                    <input
+                        type={"number"}
+                        onChange={handleNumInputChange}
+                        value={newNumber}
+                    />
+                </div>
+                <div>
+                    <Button Primary type={"submit"} text={"Add"} />
+                    <CancelButton
+                        type={"reset"}
+                        value={"reset"}
+                        text={"Clear"}
+                    />
+                </div>
+            </StyledForm>
+        </div>
     );
 };
 
